@@ -16,7 +16,7 @@ export class CategoryService {
 
   public getCategories(): Observable<Category[]>{
     return this.httpClient
-      .get<Category[]>('${this.apiUrl}/categories')
+      .get<Category[]>(`${this.apiUrl}/categories`)
       .pipe(tap(categories => this.categories.set(categories)));
   }
 }

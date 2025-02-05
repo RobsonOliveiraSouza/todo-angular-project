@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
 import { CategoryService } from '../../services/category.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { CategoryService } from '../../services/category.service';
       <span class="text-2xl font-semibold">Categorias</span>
 
       <ul>
-        @for(category of categories(); track category.id){
+        @for (category of categories(); track category.id) {
           <li class="text-xl font-medium">{{ category.name }}</li>
         }
       </ul>
@@ -22,5 +22,13 @@ import { CategoryService } from '../../services/category.service';
 export class MainListComponent {
   private readonly categoryService = inject(CategoryService);
 
-  public categories = this.categoryService.categories
+  public categories = this.categoryService.categories;
+
+  constructor() {
+    this.categoryService.getCategories().subscribe();
+
+    effect(() => {
+      console.log('Categorias carregadas:', this.categories());
+    });
+  }
 }
