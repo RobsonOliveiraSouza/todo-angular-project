@@ -7,9 +7,9 @@ import { CategoryService } from '../../services/category.service';
   imports: [],
   template: `
     <section class="mt-16 mx-12 pl-8">
-      <span class="text-2xl font-semibold">Categorias</span>
+      <span class="text-3xl font-semibold">Categorias</span>
 
-      <ul>
+        <ul class="mt-4 space-y-4">
         @for (category of categories(); track category.id) {
           <li class="text-xl font-medium">{{ category.name }}</li>
         }
