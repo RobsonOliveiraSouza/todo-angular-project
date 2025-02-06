@@ -22,13 +22,5 @@ import { CategoryService } from '../../services/category.service';
 export class MainListComponent {
   private readonly categoryService = inject(CategoryService);
 
-  public categories = this.categoryService.categories;
-
-  constructor() {
-    this.categoryService.getCategories().subscribe();
-
-    effect(() => {
-      console.log('Categorias carregadas:', this.categories());
-    });
-  }
+  public categories = this.categoryService.categories
 }

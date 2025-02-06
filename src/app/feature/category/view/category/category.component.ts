@@ -24,6 +24,4 @@ const COMPONENTS = [MainListComponent, ColorsListComponent];
 export class CategoryComponent {
 
   private readonly categoryService = inject(CategoryService);
-
-  public categories$ = this.categoryService.getCategories();
 }
