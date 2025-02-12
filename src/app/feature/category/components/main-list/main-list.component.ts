@@ -23,4 +23,7 @@ export class MainListComponent {
   private readonly categoryService = inject(CategoryService);
 
   public categories = this.categoryService.categories
+
+
+  /* -- Alterar para standalone: false, pois será atualizado para versão 19. */
 }

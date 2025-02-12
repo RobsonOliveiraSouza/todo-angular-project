@@ -24,4 +24,7 @@ const MODULES = [MatDividerModule];
   styles: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainComponent {}
+export class MainComponent {
+
+  /* -- Alterar para standalone: false, pois será atualizado para versão 19. */
+}

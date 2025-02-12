@@ -35,4 +35,6 @@ export class ColorsListComponent {
   public categories = this.categoryService.categories;
 
   public categoryBackgroundColors = categoryBackgroundColors;
+
+  /* -- Alterar para standalone: false, pois será atualizado para versão 19. */
 }

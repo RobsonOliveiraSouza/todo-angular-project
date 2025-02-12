@@ -24,4 +24,6 @@ const COMPONENTS = [MainListComponent, ColorsListComponent];
 export class CategoryComponent {
 
   private readonly categoryService = inject(CategoryService);
+
+  /* -- SE PRECISO -- Alterar para standalone: false, pois será atualizado para versão 19. */
 }
