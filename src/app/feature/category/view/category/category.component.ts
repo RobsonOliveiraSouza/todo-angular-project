@@ -20,7 +20,7 @@ const COMPONENTS = [MainListComponent, ColorsListComponent];
     styles: '',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CategoryComponent {
+export class CategoryComponent {  //testing GIT
 
   private readonly categoryService = inject(CategoryService);
 }
