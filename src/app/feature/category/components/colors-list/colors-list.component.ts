@@ -6,10 +6,9 @@ import { categoryBackgroundColors } from '../../constants/category-colors';
 const MODULES = [MatDividerModule];
 
 @Component({
-  selector: 'app-colors-list',
-  standalone: true,
-  imports: [...MODULES],
-  template: `
+    selector: 'app-colors-list',
+    imports: [...MODULES],
+    template: `
     <section class="flex flex-col gap-4 w-full h-auto mb-4">
       <!-- Divisor -->
       <mat-divider class="h-full opacity-50" />
@@ -26,8 +25,8 @@ const MODULES = [MatDividerModule];
       </div>
     </section>
   `,
-  styles: '',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    styles: '',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ColorsListComponent { 
   private readonly categoryService = inject(CategoryService);
@@ -35,6 +34,4 @@ export class ColorsListComponent {
   public categories = this.categoryService.categories;
 
   public categoryBackgroundColors = categoryBackgroundColors;
-
-  /* -- Alterar para standalone: false, pois será atualizado para versão 19. */
 }

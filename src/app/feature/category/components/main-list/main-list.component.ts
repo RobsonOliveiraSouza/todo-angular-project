@@ -2,10 +2,9 @@ import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/cor
 import { CategoryService } from '../../services/category.service';
 
 @Component({
-  selector: 'app-main-list',
-  standalone: true,
-  imports: [],
-  template: `
+    selector: 'app-main-list',
+    imports: [],
+    template: `
     <section class="mt-16 mx-12 pl-8">
       <span class="text-3xl font-semibold">Categorias</span>
 
@@ -16,14 +15,11 @@ import { CategoryService } from '../../services/category.service';
       </ul>
     </section>
   `,
-  styles: '',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    styles: '',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainListComponent {
   private readonly categoryService = inject(CategoryService);
 
   public categories = this.categoryService.categories
-
-
-  /* -- Alterar para standalone: false, pois será atualizado para versão 19. */
 }

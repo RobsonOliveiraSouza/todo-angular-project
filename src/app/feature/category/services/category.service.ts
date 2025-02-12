@@ -12,7 +12,7 @@ export class CategoryService {
 
   private readonly httpClient = inject(HttpClient);
 
-  public categories = toSignal(     /* -- Uso de toSignal, evitando o uso de Observables  */
+  public categories = toSignal(
     this.httpClient.get<Category[]>(`${this.apiUrl}/categories`),
     { initialValue: [] as Category[] }
   );
