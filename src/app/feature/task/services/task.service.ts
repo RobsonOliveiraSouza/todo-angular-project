@@ -26,6 +26,12 @@ export class TaskService {
     );
   }
 
+  public createTask(task: Partial<Task>): Observable<Task> {
+    return this._httpClient
+      .post<Task>(`${this._apiUrl}/tasks`, task)
+      .pipe(tap(tasks => this.insertATaskInTheTaskList(tasks)));
+  }
+
   public insertATaskInTheTaskList(newTask: Task): void {
     const updatedTasks = [...this.tasks(), newTask];
     const sortedTasks = this.getSortedTasks(updatedTasks);
@@ -53,18 +59,13 @@ export class TaskService {
   }
 
   public updateIsCompletedStatus(
-      taskId: string, 
-      isCompleted: boolean
-    ): Observable<Task> {
+    taskId: string,
+    isCompleted: boolean
+  ): Observable<Task> {
     return this._httpClient.patch<Task>(
       `${this._apiUrl}/tasks/${taskId}/`,
       { isCompleted }
     );
-  }
-
-
-  public createTask(task: Partial<Task>): Observable<Task> {
-    return this._httpClient.post<Task>(`${this._apiUrl}/tasks`, task);
   }
 
   public deleteTask(taskId: string): Observable<Task> {
