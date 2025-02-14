@@ -41,10 +41,9 @@ export class TaskService {
 
 
   public updateTask(updatedTask: Task): Observable<Task> {
-    return this._httpClient.put<Task>(
-      `${this._apiUrl}/tasks/${updatedTask.id}`,
-      updatedTask
-    );
+    return this._httpClient
+      .put<Task>(`${this._apiUrl}/tasks/${updatedTask.id}`, updatedTask)
+      .pipe(tap(task => this.updateATaskInTheTasksList(task)));
   }
 
   public updateATaskInTheTasksList(updatedTask: Task): void {
@@ -63,13 +62,15 @@ export class TaskService {
     isCompleted: boolean
   ): Observable<Task> {
     return this._httpClient.patch<Task>(
-      `${this._apiUrl}/tasks/${taskId}/`,
+      `${this._apiUrl}/tasks/${taskId}`,
       { isCompleted }
-    );
+    ).pipe(tap(task => this.updateATaskInTheTasksList(task)));
   }
 
   public deleteTask(taskId: string): Observable<Task> {
-    return this._httpClient.delete<Task>(`${this._apiUrl}/tasks/${taskId}`);
+    return this._httpClient
+      .delete<Task>(`${this._apiUrl}/tasks/${taskId}`)
+      .pipe(tap(task => this.deleteATaskInTheTasksList(taskId)));
   }
 
   public deleteATaskInTheTasksList(taskId: string): void {
@@ -77,6 +78,6 @@ export class TaskService {
   }
 
   public getSortedTasks(tasks: Task[]): Task[] {
-    return tasks.sort((a, b) => a.title.localeCompare(b.title));
+    return tasks.sort((a, b) => a.title?.localeCompare(b.title));
   }
 }

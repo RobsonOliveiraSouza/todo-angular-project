@@ -7,7 +7,12 @@ import {
     provideHttpClientTesting
 } from "@angular/common/http/testing";
 
-import { task, TASK_INTERNAL_SERVER_ERROR_RESPONSE, tasks } from "../../../__mocks__/task";
+import {
+    task, tasks,
+    TASK_INTERNAL_SERVER_ERROR_RESPONSE,
+    TASK_UNPROCESSIBLE_ENTITY_RESPONSE
+} from "../../../__mocks__/task";
+
 import { response } from "express";
 import { Task } from "../model/task.model";
 
@@ -83,26 +88,28 @@ describe('TaskService', () => {
     });
 
     describe('createTask', () => {
-        it('should return a list of tasks', waitForAsync(() => {
-            taskService.getTasks().subscribe(response => {
-                expect(response).toEqual(MOCKED_TASKS);
-                expect(taskService.tasks()).toEqual(MOCKED_TASKS);
+        it('should create a new task', waitForAsync(() => {
+
+
+            taskService.createTask(MOCKED_TASK).subscribe(() => {
+                expect(taskService.tasks()[0]).toEqual(MOCKED_TASK);
+                expect(taskService.tasks().length).toEqual(1);
             });
 
             const req = httpTestingController.expectOne(`${apiUrl}/tasks`);
 
-            req.flush(MOCKED_TASKS);
+            req.flush(MOCKED_TASK);
 
-            expect(req.request.method).toEqual('GET');
+            expect(req.request.method).toEqual('POST');
         }));
 
-        it('should throw and error when server return Internal server error', waitForAsync(() => {
+        it('should throw unprocessable entity with invalid body when create a task', waitForAsync(() => {
 
             let httpErrorResponse: HttpErrorResponse | undefined;
 
-            taskService.getTasks().subscribe({
+            taskService.createTask(MOCKED_TASK).subscribe({
                 next: () => {
-                    fail('failed to fetch the tasks list');
+                    fail('failed to add a new task');
                 },
                 error: (error: HttpErrorResponse) => {
                     httpErrorResponse = error;
@@ -111,14 +118,156 @@ describe('TaskService', () => {
 
             const req = httpTestingController.expectOne(`${apiUrl}/tasks`);
 
-            req.flush('Internal Server Error', TASK_INTERNAL_SERVER_ERROR_RESPONSE);
+            req.flush('Unprocessable Entity', TASK_UNPROCESSIBLE_ENTITY_RESPONSE);
 
             if (!httpErrorResponse) {
                 throw new Error('Error needs to be defined');
             }
 
-            expect(httpErrorResponse.status).toEqual(500);
-            expect(httpErrorResponse.statusText).toEqual('Internal Server Error');
+            expect(httpErrorResponse.status).toEqual(422);
+            expect(httpErrorResponse.statusText).toEqual('Unprocessable Entity');
+        }));
+    });
+
+    describe('updateTask', () => {
+        it('should update a task', waitForAsync(() => {
+
+            taskService.tasks.set([MOCKED_TASK]);
+
+            const updatedTask = MOCKED_TASK;
+            updatedTask.title = 'Ir na academia treinar perna';
+
+            taskService.updateTask(updatedTask).subscribe(() => {
+                expect(taskService.tasks()[0].title).toEqual('Ir na academia treinar perna');
+            });
+
+            const req = httpTestingController.expectOne(`${apiUrl}/tasks/${updatedTask.id}`);
+
+            req.flush(MOCKED_TASK);
+
+            expect(req.request.method).toEqual('PUT');
+        }));
+
+        it('should throw unprocessable entity with invalid body when update a task', waitForAsync(() => {
+
+            let httpErrorResponse: HttpErrorResponse | undefined;
+
+            taskService.tasks.set([MOCKED_TASK]);
+
+            const updatedTask = MOCKED_TASK;
+            updatedTask.title = 'Ir na academia treinar perna';
+
+            taskService.updateTask(MOCKED_TASK).subscribe({
+                next: () => {
+                    fail('failed to update a task');
+                },
+                error: (error: HttpErrorResponse) => {
+                    httpErrorResponse = error;
+                }
+            });
+
+            const req = httpTestingController.expectOne(`${apiUrl}/tasks/${updatedTask.id}`);
+
+            req.flush('Unprocessable Entity', TASK_UNPROCESSIBLE_ENTITY_RESPONSE);
+
+            if (!httpErrorResponse) {
+                throw new Error('Error needs to be defined');
+            }
+
+            expect(httpErrorResponse.status).toEqual(422);
+            expect(httpErrorResponse.statusText).toEqual('Unprocessable Entity');
+        }));
+    });
+
+    describe('updateIsCompletedStatus', () => {
+        it('should update IsCompleteStatus of a task', waitForAsync(() => {
+
+            taskService.tasks.set(MOCKED_TASKS);
+
+            const updatedTask = MOCKED_TASK;
+
+            taskService.updateIsCompletedStatus(MOCKED_TASK.id, true).subscribe(() => {
+                expect(taskService.tasks()[0].isCompleted).toBeTruthy();
+            });
+
+            const req = httpTestingController.expectOne(`${apiUrl}/tasks/${updatedTask.id}`);
+
+            req.flush({ isCompleted: true });
+
+            expect(req.request.method).toEqual('PATCH');
+        }));
+
+        it('should throw an error when update a task isCompletedStatus status', waitForAsync(() => {
+
+            let httpErrorResponse: HttpErrorResponse | undefined;
+
+            const updatedTask = MOCKED_TASK;
+
+            taskService.tasks.set([MOCKED_TASK]);
+
+            taskService.updateIsCompletedStatus(updatedTask.id, true).subscribe({
+                next: () => {
+                    fail('failed to update a task isCompleted status');
+                },
+                error: (error: HttpErrorResponse) => {
+                    httpErrorResponse = error;
+                },
+            });
+
+            const req = httpTestingController.expectOne(`${apiUrl}/tasks/${updatedTask.id}`);
+
+            req.flush('Unprocessable Entity', TASK_UNPROCESSIBLE_ENTITY_RESPONSE);
+
+            if (!httpErrorResponse) {
+                throw new Error('Error needs to be defined');
+            }
+
+            expect(httpErrorResponse.status).toEqual(422);
+            expect(httpErrorResponse.statusText).toEqual('Unprocessable Entity');
+        }));
+    });
+
+    describe('deleteTask', () => {
+        it('should delete a task', waitForAsync(() => {
+            taskService.tasks.set(MOCKED_TASKS);
+
+            taskService.deleteTask(MOCKED_TASK.id).subscribe(() => {
+                expect(taskService.tasks().length).toEqual(1);
+            });
+
+            const req = httpTestingController.expectOne(`${apiUrl}/tasks/${MOCKED_TASK.id}`);
+
+            req.flush(null);
+
+            expect(req.request.method).toEqual('DELETE');
+        }));
+
+        it('should throw unprocessable entity with invalid body when delete a task', waitForAsync(() => {
+            let httpErrorResponse: HttpErrorResponse | undefined;
+
+            taskService.tasks.set([MOCKED_TASK]);
+
+            taskService.deleteTask(MOCKED_TASK.id).subscribe({
+                next: () => {
+                    fail('failed to delete a task');
+                },
+                error: (error: HttpErrorResponse) => {
+                    httpErrorResponse = error;
+                },
+            });
+
+            const req = httpTestingController.expectOne(
+                `${apiUrl}/tasks/${MOCKED_TASK.id}`
+            );
+
+            req.flush('Unprocessable Entity', TASK_UNPROCESSIBLE_ENTITY_RESPONSE);
+
+            if (!httpErrorResponse) {
+                throw new Error('Error needs to be defined');
+            }
+
+            expect(httpErrorResponse.status).toEqual(422);
+            expect(httpErrorResponse.statusText).toEqual('Unprocessable Entity');
         }));
     });
 });
