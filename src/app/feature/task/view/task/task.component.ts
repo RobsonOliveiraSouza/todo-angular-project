@@ -5,13 +5,11 @@ import { InclusionFormComponent } from "../../components/inclusion-form/inclusio
     selector: 'app-task',
     imports: [InclusionFormComponent],
     template: `
-        <div class="flex flex-col mx-10">
-            <!-- Título -->
-            <span class="font-bold text-4xl">Meu quadro de tarefas!</span>
-
-            <!-- Formulário -->
+        <div class="flex flex-col mx-12 mt-10">
+            
+            <span class="font-bold text-4xl ">Meu quadro de tarefas!</span>
+            
             <app-inclusion-form></app-inclusion-form>
-            <!-- Lista de tarefas -->
         </div>
     `,
     styles: '',

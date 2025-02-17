@@ -22,4 +22,6 @@ export class CategoryService {
       .get<Category[]>(`${this.apiUrl}/categories`)
       .pipe(tap(categories => this.categories.set(categories)));
   }*/
+
+  public selectedCategoryId = signal('1');
 }
