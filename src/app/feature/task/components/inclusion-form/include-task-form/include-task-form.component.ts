@@ -36,7 +36,7 @@ const COMMONS = [CommonModule];
       }"
       autocomplete="off" class="flex flex-row gap-2 select-none" [formGroup]="newTaskForm">
       <mat-form-field class="w-full">
-        <mat-label>Tarefa</mat-label>
+        <mat-label for="title" data-testid="titleLabel">Tarefa</mat-label>
         <input 
           formControlName="title" 
           matInput 
@@ -45,7 +45,7 @@ const COMMONS = [CommonModule];
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Categoria</mat-label>
+        <mat-label for="categoryId" data-testid="categoryIdLabel">Categoria</mat-label>
         <mat-select 
           formControlName="categoryId" 
           (selectionChange)="selectionChangeHandler($event)" (keyup.enter)="onEnterToAddATask()">
