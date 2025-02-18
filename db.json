@@ -1,17 +1,6 @@
 {
   "tasks": [
-    {
-      "id": "885e",
-      "title": "teste2",
-      "categoryId": "5",
-      "isCompleted": false
-    },
-    {
-      "id": "ae6d",
-      "title": "teste3",
-      "categoryId": "1",
-      "isCompleted": false
-    }
+    
   ],
   "categories": [
     {
