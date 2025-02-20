@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  todo-angular-project:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: todo-angular-project:v1
+    container_name: todo-angular-project
+    restart: on-failure
+    ports:
+      - "8080:4200"

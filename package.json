@@ -4,11 +4,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "cstart": "ng-serve --host 0.0.0.0",
     "server": "json-server --watch db.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "test:watch": "ng test --watch",
+    "test": "jest --no-cache",
+    "test-isolated": "jest -c=jest-isolated.config.ts --no-cache",
+    "test-esm": "node --experimental-vm-modules --no-warnings node_modules/jest/bin/jest.js -c=jest-esm.config.ts --no-cache",
+    "test-esm-isolated": "node --experimental-vm-modules --no-warnings node_modules/jest/bin/jest.js -c=jest-esm-isolated.config.ts --no-cache",
     "serve:ssr:my-task-board": "node dist/my-task-board/server/server.mjs",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
@@ -34,7 +37,6 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-builders/jest": "^19.0.0",
     "@angular-eslint/builder": "18.3.1",
     "@angular-eslint/eslint-plugin": "18.3.1",
     "@angular-eslint/eslint-plugin-template": "18.3.1",
