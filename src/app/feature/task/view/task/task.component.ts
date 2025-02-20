@@ -15,4 +15,4 @@ import { InclusionFormComponent } from "../../components/inclusion-form/inclusio
     styles: '',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TaskComponent {}
+export class TaskComponent { }

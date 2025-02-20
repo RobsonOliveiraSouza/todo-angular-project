@@ -1,25 +1,22 @@
 import { Component, inject } from '@angular/core';
-import {
-  MatButtonModule,
-  MatIconButton,
-  MatAnchor,
-  MatButton,
-} from '@angular/material/button';
+
+import { MatButtonModule, MatIconButton } from '@angular/material/button';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ThemeService } from '../../services/theme.service';
 
 @Component({
-    selector: 'app-theme-toggle',
-    imports: [
-        MatButtonModule,
-        MatCardModule,
-        MatIcon,
-        MatIconButton,
-        MatTooltipModule,
-    ],
-    template: `
+  selector: 'app-theme-toggle',
+  imports: [
+    MatButtonModule,
+    MatCardModule,
+    MatIcon,
+    MatIconButton,
+    MatTooltipModule,
+  ],
+  template: `
     <div class="fixed top-0 right-0">
       <button
         type="button"
@@ -35,7 +32,7 @@ import { ThemeService } from '../../services/theme.service';
       </button>
     </div>
   `,
-    styles: ``
+  styles: ``
 })
 export class ThemeToggleComponent {
   public themeService = inject(ThemeService);

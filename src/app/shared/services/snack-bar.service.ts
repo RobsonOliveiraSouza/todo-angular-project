@@ -27,7 +27,7 @@ export class SnackBarService {
     this.verticalPosition = verticalPosition;
 
     this._openSnackBar();
-}
+  }
 
   private _openSnackBar(): void {
     this._snackBar.open(this.message(), 'Fechar', {

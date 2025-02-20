@@ -37,4 +37,4 @@ export class InclusionFormComponent {
   public readonly selectedCategoryId = this.categoryService.selectedCategoryId;
 
   public colorVariants = categoryIdBackgroundColors;
- }
+}

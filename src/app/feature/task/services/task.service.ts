@@ -33,10 +33,6 @@ export class TaskService {
   }
 
   public insertATaskInTheTaskList(newTask: Task): void {
-    /*const updatedTasks = [...this.tasks(), newTask];
-    const sortedTasks = this.getSortedTasks(updatedTasks);
-    this.tasks.set(sortedTasks);*/
-
     this.tasks.update(tasks => {
       const newTaskList = [...tasks, newTask];
 

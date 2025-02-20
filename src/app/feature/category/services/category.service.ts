@@ -17,11 +17,5 @@ export class CategoryService {
     { initialValue: [] as Category[] }
   );
 
-  /*public getCategories(): Observable<Category[]>{
-    return this.httpClient
-      .get<Category[]>(`${this.apiUrl}/categories`)
-      .pipe(tap(categories => this.categories.set(categories)));
-  }*/
-
   public selectedCategoryId = signal('1');
 }

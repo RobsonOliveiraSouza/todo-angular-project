@@ -75,7 +75,7 @@ export class IncludeTaskFormComponent {
 
   public isIncludeTaskFormDisabled = computed(() => {
 
-    if(this.taskService.isLoadingTask()){
+    if (this.taskService.isLoadingTask()) {
       this.newTaskForm.disable();
 
       return this.taskService.isLoadingTask();

@@ -1,4 +1,4 @@
-import { HttpResponse, HttpErrorResponse, provideHttpClient } from "@angular/common/http";
+import { HttpErrorResponse, provideHttpClient } from "@angular/common/http";
 import { TestBed, waitForAsync } from "@angular/core/testing";
 import { TaskService } from "./task.service";
 
@@ -13,7 +13,6 @@ import {
     TASK_UNPROCESSIBLE_ENTITY_RESPONSE
 } from "../../../__mocks__/task";
 
-import { response } from "express";
 import { Task } from "../model/task.model";
 
 describe('TaskService', () => {

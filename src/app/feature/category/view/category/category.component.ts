@@ -6,9 +6,9 @@ import { CategoryService } from '../../services/category.service';
 const COMPONENTS = [MainListComponent, ColorsListComponent];
 
 @Component({
-    selector: 'app-category',
-    imports: [...COMPONENTS],
-    template: `
+  selector: 'app-category',
+  imports: [...COMPONENTS],
+  template: `
     <div class="flex flex-col justify-between h-full w-full">
       <!--- main-list --->
       <app-main-list />
@@ -17,10 +17,10 @@ const COMPONENTS = [MainListComponent, ColorsListComponent];
       <app-colors-list />
     </div>
   `,
-    styles: '',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  styles: '',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CategoryComponent {  //testing GIT
+export class CategoryComponent {
 
   private readonly categoryService = inject(CategoryService);
 }
