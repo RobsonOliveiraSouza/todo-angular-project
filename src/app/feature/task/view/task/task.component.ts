@@ -24,21 +24,28 @@ const MODULES = [CommonModule];
                 <ul class="flex flex-col items-start w-full ">
                 @for (task of tasks(); track task.id) {
                     <li class="p-2 h-10 border rounded-md shadow flex justify-between items-center text-sm w-1/2 max-w-[50%]">
-                    <div class="flex items-center">
-                        <span [class.line-through]="task.isCompleted" class="text-sm">
-                        {{ task.title }}
-                        </span>
+                        <div class="flex items-center">
+                            <span [class.line-through]="task.isCompleted" class="text-sm">
+                            {{ task.title }}
+                            </span>
 
-                        <span class="ml-2 px-1 py-0.5 text-white text-xs rounded"
-                            [ngClass]="getCategoryClass(task)">
-                        {{ getCategoryName(task) }}
-                        </span>
-                    </div>
-                    
-                    <button (click)="toggleTaskStatus(task)" class="px-2 py-0.5 bg-blue-500 text-white rounded text-xs">
-                        {{ task.isCompleted ? 'Reabrir' : 'Concluir' }}
-                    </button>
+                            <span class="ml-2 px-1 py-0.5 text-white text-xs rounded"
+                                [ngClass]="getCategoryClass(task)">
+                            {{ getCategoryName(task) }}
+                            </span>
+                        </div>
+
+                        <div class="flex gap-2">
+                            <button (click)="toggleTaskStatus(task)" class="px-2 py-0.5 bg-blue-500 text-white rounded text-xs">
+                            {{ task.isCompleted ? 'Reabrir' : 'Concluir' }}
+                            </button>
+
+                            <button (click)="deleteTask(task.id)" class="px-2 py-0.5 bg-red-500 text-white rounded text-xs">
+                            Excluir
+                            </button>
+                        </div>
                     </li>
+
                 }
                 </ul>
 
@@ -83,4 +90,10 @@ export class TaskComponent {
         const categoryMapValue = this.categoryMap();
         return categoryMapValue[task.categoryId]?.name ?? 'Desconhecida';
     }
+
+    deleteTask(taskId: string): void {
+        if (confirm('Tem certeza que deseja excluir esta tarefa?')) {
+          this.taskService.deleteTask(taskId).subscribe();
+        }
+      }      
 }

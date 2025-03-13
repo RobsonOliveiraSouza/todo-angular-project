@@ -1,12 +1,6 @@
 {
   "tasks": [
     {
-      "id": "e58f",
-      "title": "Comprar pão para sabado.",
-      "categoryId": "1",
-      "isCompleted": false
-    },
-    {
       "id": "af67",
       "title": "Ler sobre Fisica Quantica.",
       "categoryId": "2",
@@ -61,21 +55,9 @@
       "isCompleted": true
     },
     {
-      "id": "f277",
-      "title": "Limpar a sala",
-      "categoryId": "1",
-      "isCompleted": false
-    },
-    {
-      "id": "f004",
-      "title": "Limpar sofá",
-      "categoryId": "1",
-      "isCompleted": true
-    },
-    {
-      "id": "8937",
-      "title": "Limpar geladeira",
-      "categoryId": "1",
+      "id": "fee3",
+      "title": "Estudar capitulos I, II e III",
+      "categoryId": "2",
       "isCompleted": false
     }
   ],
