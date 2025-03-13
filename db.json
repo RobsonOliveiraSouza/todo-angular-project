@@ -1,5 +1,83 @@
 {
   "tasks": [
+    {
+      "id": "e58f",
+      "title": "Comprar pão para sabado.",
+      "categoryId": "1",
+      "isCompleted": false
+    },
+    {
+      "id": "af67",
+      "title": "Ler sobre Fisica Quantica.",
+      "categoryId": "2",
+      "isCompleted": false
+    },
+    {
+      "id": "a09a",
+      "title": "Configurar Intellij e Postgres corretamente",
+      "categoryId": "3",
+      "isCompleted": false
+    },
+    {
+      "id": "c2ee",
+      "title": "Levar documentos para casa.",
+      "categoryId": "4",
+      "isCompleted": false
+    },
+    {
+      "id": "c363",
+      "title": "Agendar dentista.",
+      "categoryId": "5",
+      "isCompleted": false
+    },
+    {
+      "id": "1d81",
+      "title": "Checar no ambulatorio",
+      "categoryId": "5",
+      "isCompleted": false
+    },
+    {
+      "id": "ef94",
+      "title": "Fazer os testes no Banco de Dados",
+      "categoryId": "3",
+      "isCompleted": false
+    },
+    {
+      "id": "c838",
+      "title": "Lavar roupas",
+      "categoryId": "1",
+      "isCompleted": false
+    },
+    {
+      "id": "eb52",
+      "title": "Varrer a casa",
+      "categoryId": "1",
+      "isCompleted": false
+    },
+    {
+      "id": "37f7",
+      "title": "Atualizar",
+      "categoryId": "4",
+      "isCompleted": true
+    },
+    {
+      "id": "f277",
+      "title": "Limpar a sala",
+      "categoryId": "1",
+      "isCompleted": false
+    },
+    {
+      "id": "f004",
+      "title": "Limpar sofá",
+      "categoryId": "1",
+      "isCompleted": true
+    },
+    {
+      "id": "8937",
+      "title": "Limpar geladeira",
+      "categoryId": "1",
+      "isCompleted": false
+    }
   ],
   "categories": [
     {

@@ -49,14 +49,12 @@ export class TaskService {
 
   public updateATaskInTheTasksList(updatedTask: Task): void {
     this.tasks.update(tasks => {
-      const allTaskWithUpdatedTaskRemoved = tasks.filter(
-        task => task.id !== updatedTask.id
+      return tasks.map(task => 
+        task.id === updatedTask.id ? updatedTask : task
       );
-
-      const updatedTaskList = [...allTaskWithUpdatedTaskRemoved, updatedTask];
-      return this.getSortedTasks(updatedTaskList);
     });
   }
+  
 
   public updateIsCompletedStatus(
     taskId: string,
