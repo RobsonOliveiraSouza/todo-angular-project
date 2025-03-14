@@ -15,11 +15,11 @@ const MODULES = [MatDividerModule];
       <mat-divider class="h-full opacity-50" />
 
       <!-- Lista de cores -->
-      <div class="flex flex-wrap justify-center items-center px-2 gap-4">
+      <div class="flex flex-wrap justify-center items-center px-2 gap-2 md:gap-4">
         @for(category of categories(); track category.id){
           <span 
             class="select-none opacity-80 hover:opacity-100 flex items-center justify-center 
-            {{ categoryBackgroundColors[category.color] }} px-3 py-2 rounded-xl w-[70] 
+            {{ categoryBackgroundColors[category.color] }} px-4 py-2 rounded-xl min-w-[80px] 
             text-center text-white font-semibold cursor-pointer
             {{ selectedCategoryId() === category.id ? 'border-2 border-white' : '' }}"
             (click)="filterTasks(category.id)">

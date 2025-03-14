@@ -5,12 +5,16 @@ import { CategoryService } from '../../services/category.service';
   selector: 'app-main-list',
   imports: [],
   template: `
-    <section class="mt-16 mx-12 pl-8">
-      <span class="text-3xl font-semibold">Categorias</span>
+    <section class="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 mx-auto">
+      <span class="block text-xl sm:text-2xl md:text-3xl font-semibold text-center">
+        Categorias
+      </span>
 
-        <ul class="mt-4 space-y-4">
+      <ul class="mt-6 space-y-4 text-center">
         @for (category of categories(); track category.id) {
-          <li class="text-xl font-medium">{{ category.name }}</li>
+          <li class="text-lg sm:text-xl md:text-2xl font-medium">
+            {{ category.name }}
+          </li>
         }
       </ul>
     </section>
