@@ -13,7 +13,6 @@ const MODULES = [CommonModule];
     imports: [InclusionFormComponent, MODULES],
     template: `
         <div class="flex flex-col mx-12 mt-10">
-            
             <span class="font-bold text-4xl ">Meu quadro de tarefas!</span>
             
             <app-inclusion-form></app-inclusion-form>
@@ -22,7 +21,7 @@ const MODULES = [CommonModule];
                 <span class="text-2xl font-semibold">Tarefas:</span>
 
                 <ul class="flex flex-col items-start w-full ">
-                @for (task of tasks(); track task.id) {
+                @for (task of filteredTasks(); track task.id) {
                     <li class="p-2 h-10 border rounded-md shadow flex justify-between items-center text-sm w-1/2 max-w-[50%]">
                         <div class="flex items-center">
                             <span [class.line-through]="task.isCompleted" class="text-sm">
@@ -45,12 +44,9 @@ const MODULES = [CommonModule];
                             </button>
                         </div>
                     </li>
-
                 }
                 </ul>
-
             </div>
-
         </div>
     `,
     styles: '',
@@ -60,7 +56,8 @@ export class TaskComponent {
     private taskService = inject(TaskService);
     private categoryService = inject(CategoryService);
   
-    public tasks = this.taskService.tasks;
+    /** 🔥 Alterado para exibir as tarefas filtradas */
+    public filteredTasks = this.taskService.filteredTasks;
     public categories = this.categoryService.categories;
 
     constructor() {
@@ -74,7 +71,7 @@ export class TaskComponent {
             this.taskService.updateATaskInTheTasksList(updatedTask);
         });
     }      
-  
+
     public categoryMap = computed(() =>
       this.categories().reduce((map, category) => {
         map[category.id] = category;

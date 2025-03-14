@@ -11,6 +11,8 @@ export class TaskService {
 
   private readonly _httpClient = inject(HttpClient);
 
+  private _selectedCategoryId = signal<string | null>(null);
+
   public tasks = signal<Task[]>([]);
 
   public numberOfTasks = computed(() => this.tasks().length);
@@ -18,6 +20,15 @@ export class TaskService {
   public readonly _apiUrl = environment.apiUrl;
 
   public isLoadingTask = signal(false);
+
+  public selectedCategoryId = this._selectedCategoryId;
+
+  public filteredTasks = computed(() => {
+    const selectedCategory = this._selectedCategoryId();
+    return selectedCategory
+      ? this.tasks().filter(task => task.categoryId === selectedCategory)
+      : this.tasks();
+  });
 
   public getTasks(): Observable<Task[]> {
     return this._httpClient.get<Task[]>(`${this._apiUrl}/tasks`).pipe(
@@ -78,5 +89,9 @@ export class TaskService {
 
   public getSortedTasks(tasks: Task[]): Task[] {
     return tasks.sort((a, b) => a.title?.localeCompare(b.title));
+  }
+
+  public filterTasksByCategory(categoryId: string): void {
+    this._selectedCategoryId.update(prevId => prevId === categoryId ? null : categoryId);
   }
 }
