@@ -93,29 +93,37 @@ export class IncludeTaskFormComponent {
 
   public onEnterToAddATask(): void {
     if (this.newTaskForm.invalid) return;
-
+  
     this.taskService.isLoadingTask.set(true);
-
+  
     const { title, categoryId } = this.newTaskForm.value;
-
+  
     const newTask: Partial<Task> = {
       title,
       categoryId,
       isCompleted: false,
-    }
+    };
+
 
     this.taskService
-      .createTask(newTask)
-      .pipe(delay(1000), finalize(() => this.taskService.isLoadingTask.set(false)),
-        takeUntilDestroyed(this.destroy$))
-      .subscribe({
-        next: task => this.taskService.insertATaskInTheTaskList(task),
-        error: error => {
-          this.snackBarConfigHandler(error.message);
-        },
-        complete: () => this.snackBarConfigHandler('Tarefa incluida')
-      });
-  }
+    .createTask(newTask)
+    .pipe(
+      delay(1000),
+      finalize(() => this.taskService.isLoadingTask.set(false)),
+      takeUntilDestroyed(this.destroy$)
+    )
+    .subscribe({
+      next: task => {
+        this.taskService.insertATaskInTheTaskList(task);
+        this.newTaskForm.reset();
+        this.taskService.refreshTaskList();
+      },
+      error: error => {
+        this.snackBarConfigHandler(error.message);
+      },
+      complete: () => this.snackBarConfigHandler('Tarefa incluída'),
+    });
+}
 
   public snackBarConfigHandler(message: string): void {
     this.snackBarService.showSnackBar(message, 4000, 'end', 'top');

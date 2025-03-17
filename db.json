@@ -1,16 +1,10 @@
 {
   "tasks": [
     {
-      "id": "af67",
-      "title": "Ler sobre Fisica Quantica.",
-      "categoryId": "2",
-      "isCompleted": false
-    },
-    {
       "id": "a09a",
       "title": "Configurar Intellij e Postgres corretamente",
       "categoryId": "3",
-      "isCompleted": false
+      "isCompleted": true
     },
     {
       "id": "1d81",
@@ -19,38 +13,44 @@
       "isCompleted": false
     },
     {
-      "id": "ef94",
-      "title": "Fazer os testes no Banco de Dados",
-      "categoryId": "3",
-      "isCompleted": false
-    },
-    {
-      "id": "c838",
-      "title": "Lavar roupas",
-      "categoryId": "1",
-      "isCompleted": false
-    },
-    {
       "id": "eb52",
       "title": "Varrer a casa",
       "categoryId": "1",
-      "isCompleted": true
+      "isCompleted": false
     },
     {
-      "id": "37f7",
-      "title": "Atualizar",
-      "categoryId": "4",
-      "isCompleted": true
+      "id": "e593",
+      "title": "Limpar os armarios",
+      "categoryId": "1",
+      "isCompleted": false
     },
     {
-      "id": "fee3",
-      "title": "Estudar capitulos I, II e III",
+      "id": "fe51",
+      "title": "Escrever",
       "categoryId": "2",
       "isCompleted": false
     },
     {
-      "id": "2fc2",
-      "title": "Completar emails",
+      "id": "e5a9",
+      "title": "Comprar nichos",
+      "categoryId": "4",
+      "isCompleted": true
+    },
+    {
+      "id": "96d6",
+      "title": "Procurar planos odontologicos",
+      "categoryId": "5",
+      "isCompleted": false
+    },
+    {
+      "id": "920c",
+      "title": "Terça ir no Comcap",
+      "categoryId": "3",
+      "isCompleted": false
+    },
+    {
+      "id": "792d",
+      "title": "Cortar cabelo",
       "categoryId": "4",
       "isCompleted": false
     }

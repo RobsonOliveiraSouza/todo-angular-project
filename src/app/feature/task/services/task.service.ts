@@ -40,17 +40,17 @@ export class TaskService {
   }
 
   public createTask(task: Partial<Task>): Observable<Task> {
-    return this._httpClient.post<Task>(`${this._apiUrl}/tasks`, task);
+    return this._httpClient.post<Task>(`${this._apiUrl}/tasks`, task).pipe(
+      tap(newTask => {
+        this.insertATaskInTheTaskList(newTask);
+        this.refreshTaskList();
+      })
+    );
   }
-
+  
   public insertATaskInTheTaskList(newTask: Task): void {
-    this.tasks.update(tasks => {
-      const newTaskList = [...tasks, newTask];
-
-      return this.getSortedTasks(newTaskList);
-    });
-  }
-
+    this.tasks.set([...this.tasks(), newTask]);
+  }  
 
   public updateTask(updatedTask: Task): Observable<Task> {
     return this._httpClient
@@ -66,7 +66,6 @@ export class TaskService {
     });
   }
   
-
   public updateIsCompletedStatus(
     taskId: string,
     isCompleted: boolean
@@ -93,5 +92,10 @@ export class TaskService {
 
   public filterTasksByCategory(categoryId: string): void {
     this._selectedCategoryId.update(prevId => prevId === categoryId ? null : categoryId);
+  }
+
+  public refreshTaskList(): void {
+    this.getTasks()
+      .subscribe(tasks => this.tasks.set(tasks));
   }
 }
