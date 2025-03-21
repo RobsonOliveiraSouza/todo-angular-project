@@ -47,3 +47,5 @@ import 'jest-preset-angular/setup-jest';
   },
   "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
 }
+
+... teste //
