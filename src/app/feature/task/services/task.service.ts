@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { Task } from '../model/task.model';
 import { environment } from '../../../../environments/environment';
 import { Observable, tap } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,14 @@ export class TaskService {
   public isLoadingTask = signal(false);
 
   public selectedCategoryId = this._selectedCategoryId;
+
+  dataSource: MatTableDataSource<Task> = new MatTableDataSource<Task>();
+
+  constructor() {
+    effect(() => {
+      this.dataSource.data = this.tasks();
+    });
+  }
 
   public filteredTasks = computed(() => {
     const selectedCategory = this._selectedCategoryId();
@@ -47,10 +56,10 @@ export class TaskService {
       })
     );
   }
-  
+
   public insertATaskInTheTaskList(newTask: Task): void {
     this.tasks.set([...this.tasks(), newTask]);
-  }  
+  }
 
   public updateTask(updatedTask: Task): Observable<Task> {
     return this._httpClient
@@ -60,12 +69,12 @@ export class TaskService {
 
   public updateATaskInTheTasksList(updatedTask: Task): void {
     this.tasks.update(tasks => {
-      return tasks.map(task => 
+      return tasks.map(task =>
         task.id === updatedTask.id ? updatedTask : task
       );
     });
   }
-  
+
   public updateIsCompletedStatus(
     taskId: string,
     isCompleted: boolean
@@ -97,5 +106,10 @@ export class TaskService {
   public refreshTaskList(): void {
     this.getTasks()
       .subscribe(tasks => this.tasks.set(tasks));
+  }
+
+  public setDataSource(dataSource: MatTableDataSource<Task>): void {
+    this.dataSource = dataSource;
+    this.dataSource.data = this.tasks();
   }
 }

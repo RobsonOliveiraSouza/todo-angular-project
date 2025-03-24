@@ -10,13 +10,7 @@
       "id": "1d81",
       "title": "Checar no ambulatorio",
       "categoryId": "5",
-      "isCompleted": false
-    },
-    {
-      "id": "eb52",
-      "title": "Varrer a casa",
-      "categoryId": "1",
-      "isCompleted": false
+      "isCompleted": true
     },
     {
       "id": "e593",
@@ -52,6 +46,12 @@
       "id": "792d",
       "title": "Cortar cabelo",
       "categoryId": "4",
+      "isCompleted": false
+    },
+    {
+      "id": "f1d7",
+      "title": "Varrer casa",
+      "categoryId": "1",
       "isCompleted": false
     }
   ],

@@ -41,7 +41,7 @@ const COMMONS = [CommonModule];
           formControlName="title" 
           matInput 
           placeholder="Adicionar tarefa" (keyup.enter)="onEnterToAddATask()" />
-        <mat-hint class="text-tertiary">Aperte enter para adicionar</mat-hint>
+        <mat-hint class="text-tertiary">Aperte enter para adicionar uma nova tarefa!</mat-hint>
       </mat-form-field>
 
       <mat-form-field>
@@ -104,7 +104,6 @@ export class IncludeTaskFormComponent {
       isCompleted: false,
     };
 
-
     this.taskService
     .createTask(newTask)
     .pipe(
@@ -114,7 +113,6 @@ export class IncludeTaskFormComponent {
     )
     .subscribe({
       next: task => {
-        this.taskService.insertATaskInTheTaskList(task);
         this.newTaskForm.reset();
         this.taskService.refreshTaskList();
       },

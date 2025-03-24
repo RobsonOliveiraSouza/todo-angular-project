@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, ViewChild, AfterViewInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, computed, inject, ViewChild, AfterViewInit } from '@angular/core';
 import { InclusionFormComponent } from "../../components/inclusion-form/inclusion-form.component";
 import { TaskService } from '../../services/task.service';
 import { categoryIdBackgroundColors } from '../../../category/constants/category-colors';
@@ -89,11 +89,11 @@ export class TaskComponent {
     public categories = this.categoryService.categories;
 
     public displayedColumns: string[] = ['title', 'category', 'actions'];
-    public dataSource = new MatTableDataSource<Task>([]);
+    dataSource: MatTableDataSource<Task> = new MatTableDataSource<Task>([]);
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-    constructor() {
+    constructor(private cdr: ChangeDetectorRef) {
         this.taskService.getTasks().subscribe(tasks => {
             this.taskService.tasks.set(tasks);
             this.loadTasks();
@@ -105,13 +105,14 @@ export class TaskComponent {
     }
 
     ngOnInit() {
+        this.taskService.setDataSource(this.dataSource);
+        this.taskService.getTasks().subscribe();
         this.loadTasks();
     }
-
-    loadTasks() {
-        console.log('Tasks carregadas no loadTasks:', this.taskService.filteredTasks());
-        this.dataSource.data = this.taskService.filteredTasks();
-        
+    
+    loadTasks(): void {
+        const updatedTasks = [...this.taskService.filteredTasks()];
+        this.dataSource.data = updatedTasks;
         setTimeout(() => {
             this.dataSource._updateChangeSubscription();
         });
@@ -156,5 +157,5 @@ export class TaskComponent {
             this.taskService.insertATaskInTheTaskList(newTask);
             this.loadTasks();
         });
-    }
+    }    
 }
