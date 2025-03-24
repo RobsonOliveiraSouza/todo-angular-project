@@ -1,58 +1,81 @@
 {
   "tasks": [
     {
-      "id": "a09a",
-      "title": "Configurar Intellij e Postgres corretamente",
-      "categoryId": "3",
-      "isCompleted": true
-    },
-    {
-      "id": "1d81",
-      "title": "Checar no ambulatorio",
-      "categoryId": "5",
-      "isCompleted": true
-    },
-    {
-      "id": "e593",
-      "title": "Limpar os armarios",
-      "categoryId": "1",
-      "isCompleted": false
-    },
-    {
-      "id": "fe51",
-      "title": "Escrever",
+      "id": "c3e0",
+      "title": "Analisar horario melhor!",
       "categoryId": "2",
-      "isCompleted": false
+      "isCompleted": false,
+      "dueDate": "2025-03-25"
     },
     {
-      "id": "e5a9",
-      "title": "Comprar nichos",
+      "id": "b425",
+      "title": "Ficar de manda email",
+      "categoryId": "2",
+      "isCompleted": false,
+      "dueDate": "2025-03-27"
+    },
+    {
+      "id": "a086",
+      "title": "Organizar gavetas",
       "categoryId": "4",
-      "isCompleted": false
+      "isCompleted": false,
+      "dueDate": "2025-03-25"
     },
     {
-      "id": "96d6",
-      "title": "Procurar planos odontologicos",
+      "id": "a22d",
+      "title": "Verificar dentista",
       "categoryId": "5",
-      "isCompleted": false
+      "isCompleted": false,
+      "dueDate": "2025-03-28"
     },
     {
-      "id": "920c",
-      "title": "Terça ir no Comcap",
-      "categoryId": "3",
-      "isCompleted": false
-    },
-    {
-      "id": "792d",
-      "title": "Cortar cabelo",
+      "id": "1dec",
+      "title": "Ir lojas",
       "categoryId": "4",
-      "isCompleted": false
+      "isCompleted": false,
+      "dueDate": "2025-03-28"
     },
     {
-      "id": "f1d7",
-      "title": "Varrer casa",
+      "id": "e7d6",
+      "title": "Ir no M06 - DEF",
+      "categoryId": "3",
+      "isCompleted": false,
+      "dueDate": "2025-03-31"
+    },
+    {
+      "id": "f5ce",
+      "title": "Buscar roupa",
+      "categoryId": "4",
+      "isCompleted": true,
+      "dueDate": "2025-03-26"
+    },
+    {
+      "id": "c3fa",
+      "title": "Organizar quarto",
       "categoryId": "1",
-      "isCompleted": false
+      "isCompleted": false,
+      "dueDate": "2025-03-29"
+    },
+    {
+      "id": "fca9",
+      "title": "Analisar espaço nichos",
+      "categoryId": "1",
+      "isCompleted": true,
+      "dueDate": "2025-03-31"
+    },
+    {
+      "id": "07b2",
+      "title": "Buscar melhores planos",
+      "categoryId": "5",
+      "isCompleted": false,
+      "dueDate": "2025-04-04"
+    },
+    {
+      "id": "3d34",
+      "title": "Jogar lixo",
+      "categoryId": "1",
+      "isCompleted": false,
+      "dueDate": "2025-03-25"
     }
   ],
   "categories": [

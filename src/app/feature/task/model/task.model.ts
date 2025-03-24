@@ -3,4 +3,5 @@ export type Task = {
     title: string;
     isCompleted: boolean;
     categoryId: string;
+    dueDate: string;
 };

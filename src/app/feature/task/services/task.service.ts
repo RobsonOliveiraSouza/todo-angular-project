@@ -48,14 +48,33 @@ export class TaskService {
     );
   }
 
+  public getTasksByDayOfWeek(dayOfWeek: number): Task[] {
+    return this.tasks().filter(task => {
+      const taskDate = new Date(task.dueDate);
+      return taskDate.getDay() === dayOfWeek;
+    });
+  }  
+
   public createTask(task: Partial<Task>): Observable<Task> {
-    return this._httpClient.post<Task>(`${this._apiUrl}/tasks`, task).pipe(
-      tap(newTask => {
-        this.insertATaskInTheTaskList(newTask);
+    const dueDate = task.dueDate ? this.formatToISO(task.dueDate) : new Date().toISOString().split('T')[0];
+  
+    const newTask = {
+      ...task,
+      dueDate
+    };
+  
+    return this._httpClient.post<Task>(`${this._apiUrl}/tasks`, newTask).pipe(
+      tap(createdTask => {
+        this.insertATaskInTheTaskList(createdTask);
         this.refreshTaskList();
       })
     );
   }
+  
+  private formatToISO(dateString: string): string {
+    const [year, month, day] = dateString.split('-').map(Number);
+    return new Date(year, month - 1, day).toISOString().split('T')[0];
+  }  
 
   public insertATaskInTheTaskList(newTask: Task): void {
     this.tasks.set([...this.tasks(), newTask]);
@@ -102,6 +121,14 @@ export class TaskService {
   public filterTasksByCategory(categoryId: string): void {
     this._selectedCategoryId.update(prevId => prevId === categoryId ? null : categoryId);
   }
+
+  public filteredTasksByDay = computed(() => {
+    const today = new Date().getDay();
+    return this.tasks().filter(task => {
+      const taskDate = new Date(task.dueDate);
+      return taskDate.getDay() === today;
+    });
+  });  
 
   public refreshTaskList(): void {
     this.getTasks()

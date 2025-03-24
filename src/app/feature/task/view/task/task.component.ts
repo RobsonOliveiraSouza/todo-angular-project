@@ -37,6 +37,14 @@ const MODULES = [CommonModule, MatTableModule, MatPaginatorModule, MatButtonModu
                             </td>
                         </ng-container>
 
+                        <ng-container matColumnDef="dueDate">
+                            <th mat-header-cell *matHeaderCellDef class="text-left bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-xl font-semibold">
+                                Data de Vencimento
+                            </th>
+                            <td mat-cell *matCellDef="let task" class="py-3 px-4 text-lg text-gray-800 dark:text-gray-200">
+                                {{ task.dueDate ? formatDate(task.dueDate) : 'Sem data' }}
+                            </td>
+                        </ng-container>
 
                         <ng-container matColumnDef="category">
                             <th mat-header-cell *matHeaderCellDef class="text-left bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-xl font-semibold">
@@ -88,13 +96,14 @@ export class TaskComponent {
     public filteredTasks = this.taskService.filteredTasks;
     public categories = this.categoryService.categories;
 
-    public displayedColumns: string[] = ['title', 'category', 'actions'];
+    public displayedColumns: string[] = ['title', 'category', 'dueDate', 'actions'];
     dataSource: MatTableDataSource<Task> = new MatTableDataSource<Task>([]);
 
     @ViewChild(MatPaginator) paginator!: MatPaginator;
 
     constructor(private cdr: ChangeDetectorRef) {
         this.taskService.getTasks().subscribe(tasks => {
+            console.log('Tarefas carregadas: ', tasks);
             this.taskService.tasks.set(tasks);
             this.loadTasks();
         });
@@ -109,7 +118,7 @@ export class TaskComponent {
         this.taskService.getTasks().subscribe();
         this.loadTasks();
     }
-    
+
     loadTasks(): void {
         const updatedTasks = [...this.taskService.filteredTasks()];
         this.dataSource.data = updatedTasks;
@@ -131,6 +140,10 @@ export class TaskComponent {
             return map;
         }, {} as Record<string, { name: string; color: string }>)
     );
+
+    onTaskCreated(newTask: Partial<Task>) {
+        this.taskService.createTask(newTask).subscribe();
+    }
 
     public getCategoryClass(task: Task) {
         return categoryIdBackgroundColors[task.categoryId] || 'bg-gray-500';
@@ -157,5 +170,26 @@ export class TaskComponent {
             this.taskService.insertATaskInTheTaskList(newTask);
             this.loadTasks();
         });
-    }    
+    }
+
+    formatDate(dateString: string): string {
+        if (!dateString) return "Sem data"; 
+      
+        const date = new Date(dateString + 'T00:00:00');
+        
+        const formattedDate = date.toLocaleDateString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit'
+        });
+      
+        const dayOfWeek = date.toLocaleDateString('pt-BR', { weekday: 'long' });
+      
+        return `${formattedDate} - ${this.capitalizeFirstLetter(dayOfWeek)}`;
+      }
+      
+      capitalizeFirstLetter(text: string): string {
+        return text.charAt(0).toUpperCase() + text.slice(1);
+      }
+      
+     
 }
