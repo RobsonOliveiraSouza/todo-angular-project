@@ -76,6 +76,13 @@
       "categoryId": "1",
       "isCompleted": false,
       "dueDate": "2025-03-25"
+    },
+    {
+      "id": "6e0a",
+      "title": "Teste do domingo",
+      "categoryId": "3",
+      "isCompleted": false,
+      "dueDate": "2025-03-30"
     }
   ],
   "categories": [

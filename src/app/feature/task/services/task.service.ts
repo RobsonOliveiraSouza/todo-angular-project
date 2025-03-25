@@ -14,6 +14,10 @@ export class TaskService {
 
   private _selectedCategoryId = signal<string | null>(null);
 
+  private _selectedDay = signal<number | null>(null);
+
+  public selectedDay = this._selectedDay;
+
   public tasks = signal<Task[]>([]);
 
   public numberOfTasks = computed(() => this.tasks().length);
@@ -50,7 +54,7 @@ export class TaskService {
 
   public getTasksByDayOfWeek(dayOfWeek: number): Task[] {
     return this.tasks().filter(task => {
-      const taskDate = new Date(task.dueDate);
+      const taskDate = new Date(task.dueDate + 'T00:00:00');
       return taskDate.getDay() === dayOfWeek;
     });
   }  
@@ -137,6 +141,16 @@ export class TaskService {
 
   public setDataSource(dataSource: MatTableDataSource<Task>): void {
     this.dataSource = dataSource;
+    this.dataSource.data = this.tasks();
+  }
+
+  public filterTasksByDay(day: number): void {
+    this._selectedDay.set(day);
+    this.dataSource.data = this.getTasksByDayOfWeek(day);
+  }
+
+  public clearDayFilter(): void {
+    this._selectedDay.set(null);
     this.dataSource.data = this.tasks();
   }
 }
