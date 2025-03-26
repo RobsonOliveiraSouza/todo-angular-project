@@ -8,8 +8,8 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
     <section class="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 mx-auto">
-      <span class="block text-xl sm:text-2xl md:text-3xl mt-4 font-semibold text-center">
-        Filtre pelos Dias da Semana
+      <span class="block text-xl sm:text-2xl md:text-3xl mt-10 font-semibold text-center">
+        Dias da Semana
       </span>
 
       <ul class="mt-16 flex justify-center gap-4 flex-wrap">
@@ -19,8 +19,7 @@ import { CommonModule } from '@angular/common';
               (click)="toggleFilterByDay($index)" 
               class="w-52 h-12 px-6 py-2 rounded-lg bg-blue-500 text-white text-lg font-medium
                     hover:bg-blue-700 transition-all duration-200
-                    [class.bg-gray-500]='selectedDay() === $index'"
-            >
+                    [class.bg-gray-500]='selectedDay() === $index'">
               {{ day }}
             </button>
           </li>
